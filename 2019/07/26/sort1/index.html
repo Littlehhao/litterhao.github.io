@@ -169,27 +169,60 @@
 <ol>
 <li><h6 id="算法的分类"><a href="#算法的分类" class="headerlink" title="算法的分类"></a>算法的分类</h6><p><img src="https://i.loli.net/2019/07/26/5d3aadc3b5ea378393.jpg" alt></p>
 </li>
-</ol>
-<ol start="2">
 <li><h6 id="算法的总结"><a href="#算法的总结" class="headerlink" title="算法的总结"></a>算法的总结</h6><p><img src="https://i.loli.net/2019/07/26/5d3aaffe08df814576.jpg" alt></p>
 </li>
 </ol>
-<p>   术语说明：</p>
-<p>   ​        内排序：所有排序操作都在内存中完成。</p>
-<p>   ​        外排序：由于数据太大，因此把数据放在磁盘中，而排序通过磁盘和内存的数据传输才能进行。</p>
-<p>   ​        比较排序：排序过程中需要对数据关键字进行比较。</p>
-<p>   ​        非比较排序：排序过程中不需要对数据关键字进行比较。</p>
-<p>   ​        稳定性：每次排序后，相同关键字的相对顺序不变，例如a=b，a在b的前面，排序之后a还在b的前面。</p>
-<p>   ​        时间复杂度：一个算法执行所耗费的时间。</p>
-<p>   ​        空间复杂度：一个算法执行所需要的内存大小。</p>
-<p>下面我们就正式进入算法：</p>
+<p>   ​        术语说明：</p>
+<p>   ​            内排序：所有排序操作都在内存中完成。</p>
+<p>   ​            外排序：由于数据太大，因此把数据放在磁盘中，而排序通过磁盘和内存的数据传输才能进行。</p>
+<p>   ​            比较排序：排序过程中需要对数据关键字进行比较。</p>
+<p>   ​            非比较排序：排序过程中不需要对数据关键字进行比较。</p>
+<p>   ​            稳定性：每次排序后，相同关键字的相对顺序不变，例如a=b，a在b的前面，排序之后a还在b的前            面。</p>
+<p>   ​            时间复杂度：一个算法执行所耗费的时间。</p>
+<p>   ​            空间复杂度：一个算法执行所需要的内存大小。</p>
+<ol start="3">
+<li><h6 id="下面我们就进入排序"><a href="#下面我们就进入排序" class="headerlink" title="下面我们就进入排序"></a>下面我们就进入排序</h6></li>
+</ol>
 <ul>
 <li><h6 id="直接插入排序"><a href="#直接插入排序" class="headerlink" title="直接插入排序"></a>直接插入排序</h6><p>​    直接插入排序是非常简单的。基本思想：将一个记录插入到已排序好的有序表中，从而得到一个新，记录数增1的有序表。即：先将序列的第1个记录看成是一个有序的子序列，然后从第2个记录逐个进行插入，直至整个序列有序为止。</p>
 <p>要点：设立哨兵，作为临时储存和判断数组边界之用。</p>
 </li>
 </ul>
+<p>代码实现：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">     *      直接插入排序，嵌套循环</span></span><br><span class="line"><span class="comment">     *      时间复杂度为o(n^2)</span></span><br><span class="line"><span class="comment">     *      定义一个基准，a[1]为key,每次和索引&lt;1 的值比较，若后小于前,则终止循环。否则继续循环 			将前一位赋值给后一位。直至i&lt;0 将最小值赋值给a[0 ]</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> a</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> len</span></span><br><span class="line"><span class="comment">     */</span>    </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertSort</span><span class="params">(<span class="keyword">int</span> [] a,<span class="keyword">int</span> len)</span></span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> begin=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (begin&lt;len)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> key=a[begin];</span><br><span class="line">        <span class="keyword">for</span>(i=begin-<span class="number">1</span>;i&gt;=<span class="number">0</span>;i--)&#123;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(a[i]&lt;key)&#123;    <span class="comment">//稳定</span></span><br><span class="line"></span><br><span class="line">                a[i+<span class="number">1</span>]=key;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            a[i+<span class="number">1</span>]=a[i];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(i&lt;<span class="number">0</span>)&#123;  <span class="comment">//当a[0]&gt;a[1] 时 进入</span></span><br><span class="line">            a[<span class="number">0</span>]=key;</span><br><span class="line">        &#125;</span><br><span class="line">        begin++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<ul>
+<li><h6 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h6><p>希尔排序是一位叫做希尔的数学家提出的一种优化版本的直接插入排序</p>
+<p>希尔排序的基本思想是：先将整个待排序的记录序列分割成为若干子序列分别进行直接插入排序，待整个序列中的记录“基本有序”时，再对全体记录进行依次直接插入排序。</p>
+</li>
+</ul>
+<p>  代码实现：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">     *  希尔排序 时间复杂度 o(n^2)</span><br><span class="line">     * @param a</span><br><span class="line">     * @param len</span><br><span class="line">     */</span><br><span class="line">    public void shellSort(int[] a,int len)&#123;</span><br><span class="line"></span><br><span class="line">        int gap=len;</span><br><span class="line"></span><br><span class="line">        while (gap&gt;1)&#123;</span><br><span class="line"></span><br><span class="line">            gap=gap/3+1;</span><br><span class="line"></span><br><span class="line">            for (int i=gap;i&lt;len;i++)&#123;</span><br><span class="line"></span><br><span class="line">                int key = a[i];</span><br><span class="line">                int start = i - gap;</span><br><span class="line">                while(start &gt;= 0 &amp;&amp; key &lt;= a[start])//对当前key进行一趟直接插入排序</span><br><span class="line">                &#123;</span><br><span class="line">                    a[start+gap] = a[start];</span><br><span class="line">                    start -= gap;</span><br><span class="line">                &#125;</span><br><span class="line">                a[start + gap] = key;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<ul>
+<li><p>​    冒泡排序</p>
+<p>​    </p>
+<p>冒泡排序应该是所有人在没有详细学习数据结构前都已经熟知的排序算法。很简单！</p>
+<p>冒泡排序的基本思想：每一趟排序都把大的元素往上浮，从当前待排序列的第一个开始遍历，指针从第一个开始，如果当前元素大于下一个，那么二者交换，最大的一定被放在了最后。然后缩小待排子序列，如此循环知道当前待排序列只有一个元素。</p>
+</li>
+</ul>
+<p>​        代码实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">    *  冒泡排序 嵌套循环依次往后找  换碗 时间复杂度o(n^2)</span><br><span class="line">    * @param a</span><br><span class="line">    * @param len</span><br><span class="line">    */</span><br><span class="line">   public void bubbleSort(int [] a,int len)&#123;</span><br><span class="line"></span><br><span class="line">       int tmp=0;</span><br><span class="line"></span><br><span class="line">       if(len&lt;0) return;</span><br><span class="line"></span><br><span class="line">       for (int i=0;i&lt;len-1;i++)&#123;</span><br><span class="line"></span><br><span class="line">           boolean blog=false;</span><br><span class="line"></span><br><span class="line">           for(int j=0;j&lt;len-i-1;j++)&#123;</span><br><span class="line"></span><br><span class="line">               if(a[j]&gt;a[j+1])&#123;</span><br><span class="line">                   tmp=a[j];</span><br><span class="line">                   a[j]=a[j+1];</span><br><span class="line">                   a[j+1]=tmp;</span><br><span class="line">                   blog=true;</span><br><span class="line">               &#125;</span><br><span class="line"></span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           if(false == blog)&#123;</span><br><span class="line">               break;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>​        </p>
+<ul>
+<li><p>选择排序</p>
+<p>选择排序基本思想：选出最小（或最大）的数与第一个位置交换；然后在剩下的数当中再找最小（或者最大）的与第二个位置交换，依次类推，直到找到倒数第二个（n-1）个数与倒数第一个（n）数比较为止。</p>
+</li>
+</ul>
+<p>​        代码实现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">    *  选择排序 时间复杂度为 o(n^2) 以 a[0] 为基准，嵌套循环 找到数组内小于a[0] 则赋值变量k</span><br><span class="line">    * @param a</span><br><span class="line">    * @param n</span><br><span class="line">    */</span><br><span class="line">   public void sort(int [] a,int n)&#123;</span><br><span class="line"></span><br><span class="line">       int key,tmp;</span><br><span class="line"></span><br><span class="line">       for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line"></span><br><span class="line">          int k=i;</span><br><span class="line"></span><br><span class="line">          for(int j=i+1;j&lt;n;j++)&#123;</span><br><span class="line"></span><br><span class="line">              if(a[k]&gt;a[j])&#123;</span><br><span class="line">                  k=j;</span><br><span class="line">              &#125;</span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">          if(k!=i)&#123;</span><br><span class="line"></span><br><span class="line">              tmp=a[i];</span><br><span class="line">              a[i]=a[k];</span><br><span class="line">              a[k]=tmp;</span><br><span class="line"></span><br><span class="line">          &#125;</span><br><span class="line"></span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>好了，今天就先写这么多吧。剩下的算法下期更新！</p>
 
                 <hr>
                 
@@ -234,7 +267,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#算法的分类"><span class="toc-text">算法的分类</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#算法的总结"><span class="toc-text">算法的总结</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#直接插入排序"><span class="toc-text">直接插入排序</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-6"><a class="toc-link" href="#算法的分类"><span class="toc-text">算法的分类</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#算法的总结"><span class="toc-text">算法的总结</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#下面我们就进入排序"><span class="toc-text">下面我们就进入排序</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#直接插入排序"><span class="toc-text">直接插入排序</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#希尔排序"><span class="toc-text">希尔排序</span></a></li></ol>
                 </div>
             </div>
         </div>
